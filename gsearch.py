@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup as bs
 from googlesearch import search_news
 import requests
 import re
-
+import nltk.sentiment.vader as vader
 
 
 def getText(url):
@@ -28,26 +28,28 @@ def getText(url):
 ##        if paragraph.get('class'):
 ##            continue
         print(paragraph.getText())
+        return paragraph.getText()
 
 
-
-##urls = search_news('jamie dimon', stop=1)
-##
-##for url in urls:
-##    print(url)
-##    getText(url)
-
-
-##url = 'https://www.pcgamer.com/amd-radeon-rx-5700-and-rx-5700-xt-review-in-progress/'
-##url = 'https://www.bloomberg.com/news/articles/2018-11-20/jamie-dimon-vindicated-bitcoin-s-back-to-where-he-cried-fraud'
-##url = 'https://gizmodo.com/a-last-minute-price-drop-makes-amds-new-graphics-cards-1836074271'
-url = 'https://www.barrons.com/articles/jpmorgan-chase-ceo-jamie-dimon-interview-51559945813'
-
-getText(url)
+if __name__ == "__main__":
+    ##urls = search_news('jamie dimon', stop=1)
+    ##
+    ##for url in urls:
+    ##    print(url)
+    ##    getText(url)
 
 
+    ##url = 'https://www.pcgamer.com/amd-radeon-rx-5700-and-rx-5700-xt-review-in-progress/'
+    ##url = 'https://www.bloomberg.com/news/articles/2018-11-20/jamie-dimon-vindicated-bitcoin-s-back-to-where-he-cried-fraud'
+    ##url = 'https://gizmodo.com/a-last-minute-price-drop-makes-amds-new-graphics-cards-1836074271'
+    url = 'https://www.barrons.com/articles/jpmorgan-chase-ceo-jamie-dimon-interview-51559945813'
+
+    text = getText(url)
+    clf = vader.SentimentIntensityAnalyzer()
+    print(clf.polarity_scores(text))
 
 
+    
 
 
 
